@@ -13,15 +13,19 @@ const schema = z.object({
     .max(10, { message: '10文字以下で(^ω^)' }),
   email: z.string().email({ message: 'ちゃんとした形式で' }),
   age: z.coerce.number().positive().int(),
+  plan: z.enum(['basic', 'pro', 'premium']),
 });
+
 export type CreateFormValues = z.infer<typeof schema>;
+
 export const useCreateForm = () =>
-  useForm({
+  useForm<CreateFormValues>({
     defaultValues: {
       firstName: '',
       lastName: '',
       email: '',
       age: 0,
+      plan: 'basic',
     },
     resolver: zodResolver(schema),
   });
