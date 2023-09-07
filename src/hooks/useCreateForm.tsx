@@ -12,7 +12,7 @@ const schema = z.object({
     .min(2, { message: '2文字以上で' })
     .max(10, { message: '10文字以下で(^ω^)' }),
   email: z.string().email({ message: 'ちゃんとした形式で' }),
-  age: z.coerce.number().positive().int(),
+  age: z.coerce.number(),
   plan: z.enum(['basic', 'pro', 'premium']),
 });
 
